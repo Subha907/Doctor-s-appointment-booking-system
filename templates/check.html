@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+  background: linear-gradient(to right, #ffff99 0%, #ff9933 100%);
+}
+#myDIV {
+  width: 70%;
+  padding: 0.5%;
+  display: none;
+  background-color: white;
+  margin-top: 20px;
+  left: 13%;
+  position: relative;
+  border-color: black;
+  border-style: solid;
+  border-width: 5% 3%; 
+  border-radius: 20px;
+}
+#myDIV1 {
+  width: 60%;
+  padding: 0.5%;
+  display: none;
+  background-color:white ;
+  margin-top: 20px;
+  left: 17%;
+  position: relative;
+  border-color: black;
+  border-style: solid;
+  border-width: 5% 3%; 
+  border-radius: 20px;
+}
+.header{
+  padding: 0.5%;
+  background:black;
+}
+.header nav .logo{
+  color: orange;
+  font-family: monospace;
+  font-size: 250%;
+}
+.header nav ul li{
+  color: white;
+  font-family: monospace;
+  font-size:250%;
+  text-align: center;
+  position: relative; 
+}
+td{
+  width: 150px;
+  text-align: center;
+  border: 1px solid black;
+  padding: 5px;
+}
+tr:nth-child(even){
+  background-color: #e5e5e5;
+}
+tr:nth-child(odd){
+  background-color:;
+}
+p{
+  font-family: monospace;
+  font-size: 180%;
+}
+button{
+   background: linear-gradient(to top, #ccff33 0%, #00ffff 100%);
+}
+</style>
+</head>
+<body>
+<div class="header">
+<nav>
+         <div class="logo">
+            STASS
+         </div>
+         <ul>
+            <li>CHECK FOR DATABASE</li>
+         </ul>
+</nav>
+</div>
+<p>Double Click the "Doctor" button below to view the Doctor's DB  </p>
+
+<button onclick="myFunction()">Doctor</button>
+
+<div id="myDIV">
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Doctor's Name</th>
+      <th>PhoneNo</th>
+      <th>Email</th>
+      <th>Specialization</th>
+      <th>DOB</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in data %}
+       <tr>
+         <td>{{row[0]}}</td>
+         <td>{{row[1]}}</td>
+         <td>{{row[2]}}</td>
+         <td>{{row[3]}}</td>
+         <td>{{row[4]}}</td>
+         <td>{{row[5]}}</td>
+       </tr>
+       {% endfor %}
+  </tbody>
+</table>
+</div>
+<p>Double Click the "Patient" button below to view the Patient's DB  </p>
+
+<button onclick="myFunction1()">Patient</button>
+
+
+<div id="myDIV1">
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Doctor's Name</th>
+      <th>Specialization</th>
+      <th>Patient Name</th>
+      <th>Patient MobileNo</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in data1 %}
+       <tr>
+         <td>{{row[0]}}</td>
+         <td>{{row[1]}}</td>
+         <td>{{row[2]}}</td>
+         <td>{{row[3]}}</td>
+         <td>{{row[4]}}</td>
+       </tr>
+       {% endfor %}
+  </tbody>
+</table>
+</div>
+<p><b>Note:</b>STASS ADMIN, Please review the database everyday</p>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function myFunction1() {
+  var y = document.getElementById("myDIV1");
+  if (y.style.display === "none") {
+    y.style.display = "block";
+  } else {
+    y.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
+

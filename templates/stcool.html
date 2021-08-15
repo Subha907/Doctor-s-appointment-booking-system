@@ -1,0 +1,48 @@
+<html>
+<head>
+	<title>Home Page</title>
+		
+       <style type="text/css">
+       	  *{
+			margin: 0;
+			padding: 0;
+		}
+		
+		
+		.backvideo{
+			top:0;
+			position: relative;
+			width: 100%
+			height:auto;
+			
+		}
+		@media(min-aspect-ratio:16/9)
+		{
+			.backvideo{
+				width: 100%;
+				height: auto;
+			}
+		}
+		@media(max-aspect-ratio:16/9)
+		{
+			.backvideo{
+				width: auto;
+				height: 100%;
+			}
+		}
+		
+
+
+       </style>
+</head>
+<body>
+	<div class="header">
+	<video width="720" height="480" autoplay loop class="backvideo" muted plays in-line >
+		<source src="Doctor_03.mp4" type="video/mp4">
+	</video>
+	
+	
+</div>
+
+</body>
+</html>

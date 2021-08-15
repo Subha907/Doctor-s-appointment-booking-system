@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<head>
+	<title>booking</title>
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css')}}"/>
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <style type="text/css">
+    *{
+            margin: 0px;
+            padding: 0px;
+        }
+        html,body{
+
+    background: linear-gradient(to right, #ffff99 0%, #ff9933 100%);   
+       
+        }
+        .msg{
+            text-align: center;
+            position: absolute;
+             margin-left:;
+        }
+      .Dreceipt{
+        
+        color: blue;
+      }
+      .form{
+        text-align: center;
+      }
+      .section{
+        max-height: 450px;
+    max-width: 390px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+    border-color: black;
+    border-style: solid;
+    border-width: 10px 3px;
+    border-radius: 20px;
+    position: relative;
+  top: 50%;
+  left: 50%;
+  margin-top: 100px;
+  margin-left: -186px;
+}
+.header{
+    background-color:black ;
+    color: white;
+
+}
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 45px;
+    line-height: 45px;
+    background-color: black;
+    font-family: Monospace;
+    font-size: 15px;
+    /*left: 54.9%;*/
+    right: 2%;
+    position: absolute;
+}
+li{
+    float: right;
+    
+    border-radius: 30px;
+}
+a{
+    display: block;
+    padding: 0 28px;
+    color: black;
+    background: linear-gradient(to top, #ccff33 0%, #00ffff 100%);
+    text-decoration: none;
+    font-size: 20px;
+}
+a:hover, .active a{
+    background: linear-gradient(to top, #ccff33 0%, #00ffff 100%);
+    border-radius: px;
+    transition: all 0.3s ease 0s;
+
+}
+h1{
+   text-align: center;
+    
+}
+.container{
+            top: 45px;
+            
+            float: left;
+            position: absolute;
+            font-weight: bold;
+            font-family:  monospace;
+            font-size: 20px;}
+
+.callout {
+  position: fixed;
+  bottom: 35px;
+  right: 20px;
+  margin-left: 20px;
+  max-width: 300px;
+}
+
+.callout-header {
+  padding: 25px 15px;
+  background: #555;
+  font-size: 30px;
+  color: white;
+}
+
+.callout-container {
+  padding: 15px;
+  background-color: #ccc;
+  color: black
+}
+
+.closebtn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.closebtn:hover {
+  color: lightgrey;
+}
+
+</style>
+
+<script type="text/javascript">
+    
+
+function starttime()
+        {
+           let a;
+           a=new Date();
+           let h=a.getHours();
+           let m=a.getMinutes();
+           let s=a.getSeconds();
+           let date=a.toLocaleDateString(undefined);
+           m=checkTime(m);
+           s=checkTime(s);
+           h1=disen(h);
+           document.getElementById('time').innerHTML=h + ":" + m + ":" + s + " ; " + date;
+           let t=setTimeout(starttime,1000);
+        }
+        function checkTime(i)
+        {
+            if (i<10) {i="0"+i};
+            return i;
+        }
+        function disen(j)
+        {
+            var bt=document.getElementById('btSubmit');
+            if((j>=6)&&(j<=9))
+            {
+                bt.disabled=false;
+            }
+            else
+            {
+                bt.disabled=true;
+            }
+        }
+
+
+</script>
+
+</head>
+<body onload="starttime()">
+    <div class="header">
+        <ul>
+
+        <li > <a href="http://192.168.0.101:8081/">Home</a></li>
+        </ul>
+    <h1>
+        Booking Section
+    </h1>
+    </div>
+    <div class="container" >
+        <label ><u>TIME-DATE:</u></label> 
+        <label id="time"></label>
+    </div>
+    <div class="section">
+        <div class="title-text">
+	<form method="POST" action="/bookingProcessing" class="form">
+	<p style="font-family:verdana">
+Select your Preffered Doctor:<SELECT name="doctor" style="font-family:verdana">
+<option  hidden selected></option>
+{% for j in doctor %}
+  <OPTION   value={{j[1]}}> {{j[1]}} </OPTION>
+{% endfor %}
+</SELECT><br><br>
+
+Select the specialization:<SELECT name="specialization" style="font-family:verdana">
+<option  hidden selected></option>
+{% for j1 in specialization %}
+  <OPTION   value={{j1[1]}}> {{j1[1]}} </OPTION>
+{% endfor %}
+</SELECT><br><br>
+<input type="text" name="patientN" placeholder="Patient Name"><br><br>
+<input type="text" name="patientM" placeholder="Patient Mobile Number"><br><br>
+
+
+<input type="submit" value="Submit" id="btSubmit" disabled>
+</p>
+</form>
+</div>
+</div>
+  <div class="flash">
+		<div class="col-sm-4">
+        {% with errors = get_flashed_messages(category_filter=["success"]) %}
+            {% if errors %}
+                {%- for message in errors %}
+                <br>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <span class="span1">{{ message }}
+                        </span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <br>
+                    <div class="msg">
+                        <label>Please Press the Button Below To Download The Booking Info</label>
+                       <button type="button" class="Dreceipt">
+                           <a href="http://192.168.0.101:8081/pdfGenerate">Booking In</a>
+                       </button> 
+                    </div>
+                    
+                {% endfor -%}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class="col-sm-4">
+        {% with errors = get_flashed_messages(category_filter=["warning"]) %}
+            {% if errors %}
+                {%- for message in errors %}
+                <br><br><br><br>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <span class="span2">{{ message }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor -%}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class="col-sm-4">
+        {% with errors = get_flashed_messages(category_filter=["danger"]) %}
+            {% if errors %}
+                {%- for message in errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <span class="span3">{{ message }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor -%}
+            {% endif %}
+        {% endwith %}
+    </div>
+    </div>
+    <div class="callout">
+  <div class="callout-header">NOTICE HERE</div>
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+  <div class="callout-container">
+    <p>1.Before Filling up the form ,please click "CHECK" to check the doctor's chart <a href="#">CHECK</a><br>2.After submiting the form ,Please download the PDF for the ticket</p>
+  </div>
+</div>
+</body>
+</html>
